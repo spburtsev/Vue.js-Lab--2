@@ -1,17 +1,16 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <list-selection />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ListSelection from "./pages/ListSelection.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    ListSelection,
+  },
+};
 </script>
 
 <style>
