@@ -1,5 +1,7 @@
 <template>
-  <list-selection />
+  <main>
+    <list-selection />
+  </main>
 </template>
 
 <script>
