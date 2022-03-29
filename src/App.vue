@@ -1,16 +1,17 @@
 <template>
+  <main-header />
   <main>
-    <list-selection />
+    <router-view />
   </main>
 </template>
 
 <script>
-import ListSelection from "./pages/ListSelection.vue";
+import MainHeader from "./components/Layout/MainHeader.vue";
 
 export default {
   name: "App",
   components: {
-    ListSelection,
+    MainHeader,
   },
 };
 </script>
@@ -22,6 +23,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+main {
+  margin-top: 40px;
+  min-height: calc(100vh - 5rem);
 }
 </style>

@@ -1,4 +1,5 @@
 <template>
+  <list-style-editor :options="listStyleOptions" />
   <section class="list-selection-wrapper">
     <select
       id="breedsSelection"
@@ -10,13 +11,18 @@
         {{ breed }}
       </option>
     </select>
-    <selected-breeds :breeds="selectedBreeds" />
+    <selected-breeds
+      :breeds="selectedBreeds"
+      :title="'Selected items'"
+      :classes="listClasses"
+    />
   </section>
 </template>
 
 <script>
 import { fetchBreeds } from "../lib/breeds";
 import SelectedBreeds from "../components/SelectedBreeds.vue";
+import ListStyleEditor from "../components/ListStyleEditor.vue";
 
 export default {
   name: "ListSelection",
@@ -24,7 +30,34 @@ export default {
     return {
       breeds: [],
       selectedBreeds: [],
+      listStyleOptions: [
+        {
+          name: "Style #1",
+          className: "list-style-one",
+          selected: true,
+        },
+        {
+          name: "Style #2",
+          className: "list-style-two",
+          selected: false,
+        },
+        {
+          name: "Style #3",
+          className: "list-style-three",
+          selected: false,
+        },
+      ],
     };
+  },
+  computed: {
+    listClasses() {
+      return this.listStyleOptions
+        .filter((style) => style.selected)
+        .reduce((obj, style) => {
+          obj[style.className] = true;
+          return obj;
+        }, {});
+    },
   },
   methods: {
     async loadBreeds() {
@@ -37,10 +70,12 @@ export default {
     },
   },
   components: {
+    ListStyleEditor,
     SelectedBreeds,
   },
   created() {
     this.loadBreeds();
+    console.log(this.listClasses);
   },
 };
 </script>
@@ -60,9 +95,26 @@ export default {
   border: 1px solid #ccc;
   border-radius: 8px;
 }
-.list-selection-wrapper ul {
+.list-selection-wrapper div {
   grid-area: selected-breeds;
   padding: 4rem;
   margin: 4rem;
+}
+</style>
+
+<style>
+.list-style-one {
+  list-style-type: disc;
+  background-color: lightblue;
+}
+.list-style-two {
+  font-size: 2rem;
+  color: black;
+  font-weight: bold;
+}
+.list-style-three {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 2rem;
 }
 </style>
