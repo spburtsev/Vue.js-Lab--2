@@ -75,7 +75,6 @@ export default {
   },
   created() {
     this.loadBreeds();
-    console.log(this.listClasses);
   },
 };
 </script>

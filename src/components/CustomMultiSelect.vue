@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div
-      v-for="(option, index) in extendedOptions"
+      v-for="(option, index) in options"
       :key="option.value"
       :class="option.selected && 'selected-option'"
-      @click="onOptionClick(index)"
+      @click="onOptionSelect(index)"
     >
       {{ option.value }}
     </div>
@@ -19,29 +19,9 @@ export default {
       type: Array,
       required: true,
     },
-  },
-  methods: {
-    onOptionClick(index) {
-      this.extendedOptions[index].selected =
-        !this.extendedOptions[index].selected;
-    },
-  },
-  data() {
-    return {
-      extendedOptions: [],
-    };
-  },
-  watch: {
-    options: {
-      handler(newOptions) {
-        this.extendedOptions = newOptions.map((option) => {
-          return {
-            value: option,
-            selected: false,
-          };
-        });
-      },
-      deep: true,
+    onOptionSelect: {
+      type: Function,
+      required: true,
     },
   },
 };
